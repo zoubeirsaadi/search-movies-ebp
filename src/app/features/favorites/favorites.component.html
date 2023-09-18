@@ -3,7 +3,7 @@
   <div class="row">
     <ng-container *ngIf="favorites$ | async as favorites">
       <div class="col-md-3 mb-3" *ngFor="let movie of favorites">
-        <div class="card">
+        <div class="card" (click)="navigateToDetails(movie.id)">
           <img
             [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
             class="card-img-top"

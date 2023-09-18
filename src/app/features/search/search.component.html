@@ -32,7 +32,7 @@
   <div class="row mt-4">
     <ng-container *ngIf="searchResults$ | async as searchResults">
       <div class="col-md-3 mb-3" *ngFor="let result of searchResults">
-        <div class="card">
+        <div class="card" (click)="navigateToDetails(result.id)">
           <img
             [src]="'https://image.tmdb.org/t/p/w500' + result.poster_path"
             class="card-img-top"
@@ -40,13 +40,31 @@
           />
           <div class="card-body">
             <h5 class="card-title">{{ result.title }}</h5>
+          </div>
+
+          <div class="card-footer d-flex justify-content-between">
             <button
+              type="button"
+              (click)="addToFavorites(result, $event)"
               class="btn btn-sm btn-warning"
-              (click)="addToFavorites(result)"
             >
               Ajouter aux favoris
             </button>
-            <!--<p class="card-text">{{ result.overview }}</p>-->
+            <span
+              *ngIf="result.likesCount !== undefined && result.likesCount > 0"
+              class="ml-2"
+            >
+              {{ result.likesCount }} J'aime
+            </span>
+            <button
+              type="button"
+              (click)="toggleLike($event)"
+              class="btn"
+              [class.btn-primary]="result.isLiked"
+              [class.btn-outline-primary]="!result.isLiked"
+            >
+              {{ result.isLiked ? "Je n'aime plus" : "J'aime" }}
+            </button>
           </div>
         </div>
       </div>

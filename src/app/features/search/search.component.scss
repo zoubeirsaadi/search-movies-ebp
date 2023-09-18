@@ -1,0 +1,7 @@
+.card {
+    transition: transform 0.3s ease; /* Transition pour un effet fluide */
+    &:hover {
+      transform: scale(1.05); /* Effet de zoom au survol */
+      cursor: pointer;
+    }
+}

@@ -1,0 +1,17 @@
+<div
+  class="movie-details-container row mt-5 mb-5"
+  *ngIf="movieDetails$ | async as movieDetails"
+>
+  <div class="movie-details-image col-md-3">
+    <img
+      class="w-100"
+      [src]="'https://image.tmdb.org/t/p/w500' + movieDetails.poster_path"
+      alt="Poster Image"
+    />
+  </div>
+  <div class="movie-details-info col-md-7">
+    <h2>{{ movieDetails.title }}</h2>
+    <p>Date de sortie : {{ movieDetails.release_date }}</p>
+    <p>{{ movieDetails.overview }}</p>
+  </div>
+</div>

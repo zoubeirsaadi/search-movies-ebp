@@ -38,4 +38,11 @@ export class MovieService {
       map(response => response.results)
     );
   }
+
+  getMovieDetails(id: number): Observable<Movie> {
+    const url = `${this.apiUrl}/movie/${id}`;
+    const params = { api_key: this.apiKey };
+
+    return this.http.get<Movie>(url, { params });
+  }
 }
