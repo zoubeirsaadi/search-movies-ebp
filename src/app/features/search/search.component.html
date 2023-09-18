@@ -1,0 +1,41 @@
+<div class="search-container mt-5 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <form
+        [formGroup]="searchForm"
+        class="form-inline"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="input-group">
+          <input
+            type="text"
+            formControlName="query"
+            class="form-control"
+            placeholder="Rechercher des films..."
+          />
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <ng-container *ngIf="searchResults$ | async as searchResults">
+      <div class="col-md-3 mb-3" *ngFor="let result of searchResults">
+        <div class="card">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w500' + result.poster_path"
+            class="card-img-top"
+            alt="Poster Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ result.title }}</h5>
+            <!--<p class="card-text">{{ result.overview }}</p>-->
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
