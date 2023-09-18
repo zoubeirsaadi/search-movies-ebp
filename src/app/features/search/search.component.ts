@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Movie } from 'src/app/core/models/movie.model';
 import { MovieService } from 'src/app/core/services/movie.service';
 import { AppState } from 'src/app/store/app.state';
+import { addToFavorites } from 'src/app/store/favorites/favorites.actions';
 import { SearchFilters, searchMovies } from 'src/app/store/search/search.actions';
 import { selectSearchResults } from 'src/app/store/search/search.selectors';
 
@@ -44,5 +45,9 @@ export class SearchComponent implements OnInit {
       year: this.searchForm.value.year
     };
     this.store.dispatch(searchMovies({ query, filters }));
+  }
+
+  addToFavorites(movie: Movie) {
+    this.store.dispatch(addToFavorites({ movie }));
   }
 }

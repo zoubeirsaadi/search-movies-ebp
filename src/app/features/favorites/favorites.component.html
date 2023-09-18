@@ -1,0 +1,25 @@
+<div class="favorites-container mt-5 mb-5">
+  <h2>Mes favoris</h2>
+  <div class="row">
+    <ng-container *ngIf="favorites$ | async as favorites">
+      <div class="col-md-3 mb-3" *ngFor="let movie of favorites">
+        <div class="card">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+            class="card-img-top"
+            alt="Poster Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <button
+              class="btn btn-sm btn-secondary"
+              (click)="removeFromFavorites(movie)"
+            >
+              Retirer des favoris
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

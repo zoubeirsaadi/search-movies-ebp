@@ -40,6 +40,12 @@
           />
           <div class="card-body">
             <h5 class="card-title">{{ result.title }}</h5>
+            <button
+              class="btn btn-sm btn-warning"
+              (click)="addToFavorites(result)"
+            >
+              Ajouter aux favoris
+            </button>
             <!--<p class="card-text">{{ result.overview }}</p>-->
           </div>
         </div>

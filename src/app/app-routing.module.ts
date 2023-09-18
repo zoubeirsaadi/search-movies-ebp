@@ -9,8 +9,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { 
-    path: 'movies', 
+    path: 'movies',
     loadChildren: () => import('./features/search/search.module').then(m => m.SearchModule) 
+  },
+  { 
+    path: 'favorites', 
+    loadChildren: () => import('./features/favorites/favorites.module').then(m => m.FavoritesModule) 
   },
   {
     path: '**',

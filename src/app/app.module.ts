@@ -8,17 +8,21 @@ import { EffectsModule } from '@ngrx/effects';
 import { PageNotFoundComponent } from './core/errors/page-not-found/page-not-found.component';
 import { SearchModule } from './features/search/search.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FavoritesModule } from './features/favorites/favorites.module';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SearchModule,
+    FavoritesModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])
   ],
