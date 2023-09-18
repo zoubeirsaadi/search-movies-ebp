@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Movie } from 'src/app/core/models/movie.model';
+import { MovieService } from 'src/app/core/services/movie.service';
 import { AppState } from 'src/app/store/app.state';
-import { searchMovies } from 'src/app/store/search/search.actions';
+import { SearchFilters, searchMovies } from 'src/app/store/search/search.actions';
 import { selectSearchResults } from 'src/app/store/search/search.selectors';
 
 @Component({
@@ -15,23 +16,33 @@ import { selectSearchResults } from 'src/app/store/search/search.selectors';
 export class SearchComponent implements OnInit {
   searchForm!: FormGroup;
   searchResults$!: Observable<Movie[]>;
+  categories: any[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private movieService: MovieService
   ) {
   }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      query: ['']
+      query: [''],
+      category: [''], // Filtre catégorie (optionnel)
+      year: ['']      // Filtre année (optionnel)
+    });
+    this.movieService.getMovieGenres().subscribe(response => {
+      this.categories = response.genres;
     });
     this.searchResults$ = this.store.pipe(select(selectSearchResults));
   }
 
   onSubmit() {
-    debugger
     const query = this.searchForm.value.query;
-    this.store.dispatch(searchMovies({ query }));
+    const filters: SearchFilters = {
+      category: this.searchForm.value.category,
+      year: this.searchForm.value.year
+    };
+    this.store.dispatch(searchMovies({ query, filters }));
   }
 }
